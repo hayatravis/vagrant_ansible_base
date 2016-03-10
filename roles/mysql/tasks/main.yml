@@ -1,0 +1,13 @@
+# Mysql
+- name: install mysql rpm from a remote repo
+  command: rpm -ih http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm creates=/etc/yum.repos.d/mysql-community.repo
+- name: install mysql-community-server
+  yum: name=mysql-community-server state=installed
+- name: start server
+  service: name=mysqld state=started enabled=yes
+- name: save-mysql-tmp-password.sh
+  script: roles/mysql/sh/save-mysql-tmp-password.sh creates=/root/tmp.my.cnf
+- name: change-mysql-tmp-password.sh
+  script: roles/mysql/sh/change-mysql-tmp-password.sh creates=/root/.my.cnf
+- name: create new user
+  shell: mysql --defaults-file=/root/.my.cnf -e "GRANT ALL ON *.* TO {{mysql_user}} IDENTIFIED BY '{{mysql_pass}}' "

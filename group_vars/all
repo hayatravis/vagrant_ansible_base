@@ -1,0 +1,7 @@
+# Common
+locale: ja_JP.UTF-8
+zone: Asia/Tokyo
+
+# Mysql
+mysql_user: app_user
+mysql_pass: MysqlAppUserPass1$

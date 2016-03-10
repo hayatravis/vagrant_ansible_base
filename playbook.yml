@@ -1,0 +1,16 @@
+---
+- name: setting Vagrant for Web Server (CentOS7)
+  hosts: dev_web
+  become: yes
+  roles:
+    - common
+    - php
+    # - httpd
+    - nginx
+
+- name: setting Vagrant for DB Server (CentOS7)
+  hosts: dev_db
+  become: yes
+  roles:
+    - common
+    - mysql

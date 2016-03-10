@@ -1,0 +1,5 @@
+# Common
+- name: set locale to {{locale}}
+  command: localectl set-locale LANG={{locale}}
+- name: set zone to {{zone}}
+  command: timedatectl set-timezone {{zone}}
