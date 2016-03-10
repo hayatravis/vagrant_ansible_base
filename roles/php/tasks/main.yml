@@ -5,6 +5,7 @@
   yum: name={{ item }} enablerepo=remi-php70 state=installed
   with_items:
     - php
+    - php-mysqlnd
     - php-mcrypt
     - php-mbstring
     - php-fpm
