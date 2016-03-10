@@ -10,3 +10,9 @@
     - php-fpm
     - php-xml
     - php-pdo
+- name: Configure php-fpm
+  template:
+    src: php-fpm-www.conf.j2
+    dest: /etc/php-fpm.d/www.conf
+- name: start php-fpm
+  service: name=php-fpm state=started enabled=yes
