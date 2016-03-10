@@ -1,0 +1,5 @@
+# Mysql Client
+- name: install mysql rpm from a remote repo
+  command: rpm -ih http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm creates=/etc/yum.repos.d/mysql-community.repo
+- name: install mysql-community-client
+  yum: name=mysql-community-server state=installed

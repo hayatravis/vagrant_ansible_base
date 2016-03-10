@@ -4,4 +4,4 @@ zone: Asia/Tokyo
 
 # Mysql
 mysql_user: app_user
-mysql_pass: MysqlAppUserPass1$
+mysql_pass: MysqlApp+UserPass1

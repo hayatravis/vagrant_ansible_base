@@ -3,6 +3,11 @@
   command: rpm -ih http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm creates=/etc/yum.repos.d/mysql-community.repo
 - name: install mysql-community-server
   yum: name=mysql-community-server state=installed
+- name: Configure my.cnf
+  template:
+    src: my.cnf.j2
+    dest: /etc/my.cnf
+- name: start server
 - name: start server
   service: name=mysqld state=started enabled=yes
 - name: save-mysql-tmp-password.sh

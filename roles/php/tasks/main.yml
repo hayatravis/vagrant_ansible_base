@@ -10,6 +10,11 @@
     - php-fpm
     - php-xml
     - php-pdo
+    - php-intl
+- name: Configure php.ini
+  template:
+    src: php.ini.j2
+    dest: /etc/php.ini
 - name: Configure php-fpm
   template:
     src: php-fpm-www.conf.j2

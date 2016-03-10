@@ -3,3 +3,5 @@
   command: localectl set-locale LANG={{locale}}
 - name: set zone to {{zone}}
   command: timedatectl set-timezone {{zone}}
+# - name: Yum update packages
+#   yum: name=* state=latest
