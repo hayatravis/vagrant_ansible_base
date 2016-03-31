@@ -1,7 +1,26 @@
 # Common
-- name: set locale to {{locale}}
-  command: localectl set-locale LANG={{locale}}
-- name: set zone to {{zone}}
-  command: timedatectl set-timezone {{zone}}
-# - name: Yum update packages
-#   yum: name=* state=latest
+- name: check locale
+  shell: localectl status | grep -o =.*
+  register: locale_setting
+  changed_when: false
+  always_run: yes
+- name: set locale to {{ locale }}
+  shell: localectl set-locale LANG={{ locale }}
+  when: locale_setting.stdout.find('{{ locale }}') == -1
+- name: check timezone
+  shell: timedatectl status | grep zone
+  register: timedate_setting
+  changed_when: false
+  always_run: yes
+- name: set timezone to {{ zone }}
+  shell: timedatectl set-timezone {{ zone }}
+  when: timedate_setting.stdout.find('{{ zone }}') == -1
+- name: Yum update packages
+  yum: name=* state=latest
+- name: install tools
+  yum: name={{ item }} state=latest
+  with_items:
+    - vim
+    - zip
+    - unzip
+    - MySQL-python

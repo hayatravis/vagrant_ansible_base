@@ -3,12 +3,9 @@
   command: rpm -ih http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm creates=/etc/yum.repos.d/mysql-community.repo
 - name: install mysql-community-server
   yum: name=mysql-community-server state=installed
-- name: Configure my.cnf
-  template:
-    src: my.cnf.j2
-    dest: /etc/my.cnf
-- name: start server
-- name: start server
+- name: install python mysqldb module
+  yum: name=MySQL-python state=installed
+- name: start mysql server
   service: name=mysqld state=started enabled=yes
 - name: save-mysql-tmp-password.sh
   script: roles/mysql/sh/save-mysql-tmp-password.sh creates=/root/tmp.my.cnf
@@ -16,3 +13,9 @@
   script: roles/mysql/sh/change-mysql-tmp-password.sh creates=/root/.my.cnf
 - name: create new user
   shell: mysql --defaults-file=/root/.my.cnf -e "GRANT ALL ON *.* TO {{mysql_user}} IDENTIFIED BY '{{mysql_pass}}' "
+- name: Configure my.cnf
+  template:
+    src: my.cnf.j2
+    dest: /etc/my.cnf
+- name: restart mysql server
+  service: name=mysqld state=restarted enabled=yes
