@@ -1,0 +1,7 @@
+# phpunit
+- name: Get phpunit
+  get_url: url="https://phar.phpunit.de/phpunit.phar" dest=/tmp validate_certs=False
+- name: Copy phpunit
+  command: cp /tmp/phpunit-5.3.0.phar /usr/local/bin/phpunit
+- name: add execute phpunit
+  file: path=/usr/local/bin/phpunit mode=0755
