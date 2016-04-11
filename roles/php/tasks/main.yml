@@ -12,6 +12,7 @@
     - php-xml
     - php-pdo
     - php-intl
+    - php-pecl-xdebug
 - name: Configure php.ini
   template:
     src: php.ini.j2
